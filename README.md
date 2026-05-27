@@ -1,66 +1,117 @@
 # 🇻🇳 Vietnamese License Plate Dataset YOLO
 
-![Google](https://img.shields.io/badge/Google-Image%20Collection-4285F4?logo=google&logoColor=white)
-![Roboflow](https://img.shields.io/badge/Roboflow-Annotation-6706CE?logo=roboflow&logoColor=white)
-![Python](https://img.shields.io/badge/Python-Preprocessing-3776AB?logo=python&logoColor=white)
-![Albumentations](https://img.shields.io/badge/Albumentations-Augmentation-00A98F)
-![YOLO](https://img.shields.io/badge/YOLO-Object%20Detection-00C4CC)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
-![Format](https://img.shields.io/badge/Format-YOLO%20BBox-32CD32)
+<div align="center">
 
-Dataset ảnh **biển số xe tại Việt Nam** được thu thập từ **Google Images**, gán nhãn thủ công bằng **Roboflow**, xử lý bằng **Python** và chuẩn hóa về định dạng **YOLO Bounding Box** cho bài toán **Object Detection**.
+<!-- Banner / Logo placeholder -->
+<img src="assets/sample_bbox_grid.png" alt="Vietnamese License Plate Dataset YOLO" width="90%" />
+
+<br/>
+
+**Dataset biển số xe Việt Nam chuẩn YOLO Bounding Box cho bài toán License Plate Detection.**
+
+<br/>
+
+![Google](https://img.shields.io/badge/Google-Image%20Collection-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![Roboflow](https://img.shields.io/badge/Roboflow-Annotation-6706CE?style=for-the-badge&logo=roboflow&logoColor=white)
+![Python](https://img.shields.io/badge/Python-Preprocessing-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![YOLO](https://img.shields.io/badge/YOLO-Object%20Detection-00C4CC?style=for-the-badge)
+![Format](https://img.shields.io/badge/Format-YOLO%20BBox-32CD32?style=for-the-badge)
+
+</div>
 
 ---
 
-## 🔗 Links
+## 🚀 Quick Demo & Visuals
 
-| Nguồn | Link |
-|---|---|
-| 📦 Kaggle Dataset | [Vietnamese License Plates Dataset](https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates) |
-| 🧠 Repo huấn luyện YOLOv26 | [Yolov26 License Plate Number Detection](https://github.com/franceto/Yolov26_License-plate-number_Detection) |
-| 👤 Author | [franceto (ANH PHAP TO)](https://github.com/franceto) |
+<div align="center">
+
+[📦 Kaggle Dataset](https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates) ·
+[🧠 YOLOv26 Training Repo](https://github.com/franceto/Yolov26_License-plate-number_Detection) ·
+[👤 Author](https://github.com/franceto)
+
+<br/><br/>
+
+<img src="assets/yolov26_detection_result.png" alt="YOLOv26 Detection Result" width="90%" />
+
+</div>
 
 ---
 
-## 📌 Overview
+## ✨ Tính Năng Nổi Bật
 
-Dataset phục vụ bài toán **phát hiện biển số xe Việt Nam** trong ảnh thực tế.
+- 🏷️ **Label chuẩn YOLO bbox:** mỗi biển số được gán nhãn sát vùng biển số, không bao gồm xe hoặc nền thừa.
+- 🇻🇳 **Dữ liệu thực tế Việt Nam:** gồm xe máy, xe con, xe tải, nhiều bối cảnh sáng/tối/mờ/chói/che khuất.
+- 🧪 **Chia tập an toàn:** train/val/test theo tỉ lệ `70/20/10`, augmentation chỉ áp dụng trên train.
+- 🔍 **Kiểm tra no-leak:** giữ nguyên val/test để đánh giá khách quan và hạn chế data leakage.
+- 📊 **Có notebook tái tạo:** toàn bộ pipeline xử lý, kiểm tra label, thống kê và tạo biểu đồ nằm trong `notebooks/bs.ipynb`.
 
-| Hạng mục | Mô tả |
-|---|---|
+---
+
+## 🛠️ Công Nghệ Sử Dụng
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Roboflow](https://img.shields.io/badge/Roboflow-6706CE?style=for-the-badge&logo=roboflow&logoColor=white)
+![Albumentations](https://img.shields.io/badge/Albumentations-00A98F?style=for-the-badge)
+![YOLO](https://img.shields.io/badge/YOLO-00C4CC?style=for-the-badge)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+![Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)
+
+</div>
+
+---
+
+## ⚡ Triển Khai Nhanh
+
+**Prerequisites**
+
+- Python `3.10+`
+- Kaggle CLI nếu muốn tải dataset từ Kaggle
+- Ultralytics YOLO nếu muốn train/validate/predict nhanh
+
+```bash
+# Clone repository
+git clone https://github.com/franceto/Dataset_License-plate-number.git
+cd Dataset_License-plate-number
+
+# Cài đặt thư viện phụ thuộc
+pip install -r requirements.txt
+pip install kaggle ultralytics
+
+# Tải dataset từ Kaggle
+kaggle datasets download -d tanhphp/vietnamese-license-plates -p ./kaggle_dataset --unzip
+
+# Train nhanh với YOLO
+yolo detect train model=yolov8n.pt data=dataset/data.yaml imgsz=640 epochs=100 batch=16
+
+# Validate
+yolo detect val model=runs/detect/train/weights/best.pt data=dataset/data.yaml
+
+# Predict ảnh mới
+yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image.jpg
+```
+
+---
+
+## 📦 Dataset, Pipeline & Benchmark
+
+### 📌 Tổng Quan Dataset
+
+| Hạng mục | Giá trị |
+|---|---:|
 | Bài toán | License Plate Detection |
 | Quốc gia | Việt Nam |
 | Class | `Bien-so` |
-| Số class | 1 |
-| Format | YOLO bbox |
-| Annotation | Gán nhãn thủ công bằng Roboflow |
-| Split | Train / Val / Test |
-| Augmentation | Chỉ áp dụng trên tập train |
-
-Dataset có nhiều dạng phương tiện và bối cảnh: xe máy, xe con, xe tải; ảnh sáng, tối, mờ, chói, che khuất một phần, nền phức tạp; biển số có thể nhỏ, nghiêng, xa camera hoặc có nhiều biển số trong một ảnh. Bounding box được gán sát vùng biển số, không gán cả xe hoặc nền xung quanh.
-
----
-
-## 🖼️ Sample Bounding Boxes
-
-![Ví dụ ảnh và bounding box](assets/sample_bbox_grid.png)
-
----
-
-## 📊 Dataset Statistics
-
-### Trước tăng cường dữ liệu
-
-| Thuộc tính | Giá trị |
-|---|---:|
-| Tổng ảnh gốc | 728 |
-| Tổng bounding box | 964 |
-| Số class | 1 |
-| Tên class | `Bien-so` |
+| Số class | `1` |
+| Tổng ảnh gốc | `728` |
+| Tổng bounding box | `964` |
 | Label format | YOLO bbox |
-| Split ratio | 70 / 20 / 10 |
+| Split ratio | `70 / 20 / 10` |
+| Annotation | Roboflow thủ công |
+| Augmentation | Chỉ áp dụng trên train |
 
-### Split gốc trước augmentation
+### 📊 Split Gốc Trước Augmentation
 
 | Split | Images | Labels |
 |---|---:|---:|
@@ -68,27 +119,21 @@ Dataset có nhiều dạng phương tiện và bối cảnh: xe máy, xe con, xe
 | Val | 146 | 146 |
 | Test | 73 | 73 |
 
-> Phiên bản hiện tại đã **augment tập train**. Tập **val/test giữ nguyên** để đánh giá khách quan và tránh data leakage.
+> Val/test được giữ nguyên để đánh giá công bằng và hạn chế data leakage.
 
----
+### 🖼️ Visual Statistics
 
-## 📈 Visual Statistics
+<div align="center">
 
-### Train / Val / Test
+<img src="assets/split_distribution.png" alt="Split Distribution" width="80%" />
+<br/><br/>
+<img src="assets/image_size_distribution.png" alt="Image Size Distribution" width="80%" />
+<br/><br/>
+<img src="assets/bbox_size_distribution.png" alt="Bounding Box Size Distribution" width="80%" />
 
-![Phân bố train val test](assets/split_distribution.png)
+</div>
 
-### Image Size Distribution
-
-![Phân bố kích thước ảnh](assets/image_size_distribution.png)
-
-### Bounding Box Size Distribution
-
-![Phân bố kích thước bbox](assets/bbox_size_distribution.png)
-
----
-
-## 🔁 Pipeline
+### 🔁 Data Pipeline
 
 ```mermaid
 flowchart LR
@@ -102,39 +147,16 @@ flowchart LR
     H --> I[Final YOLO dataset]
 ```
 
----
+### 🧹 Preprocessing & Augmentation
 
-## 🧹 Preprocessing
-
-| Bước | Mục tiêu |
+| Nhóm xử lý | Nội dung |
 |---|---|
-| Giải nén ảnh gốc | Chuẩn hóa dữ liệu đầu vào |
-| Xóa ảnh trùng lặp | Tránh lặp dữ liệu |
-| Kiểm tra kích thước ảnh | Nắm phân bố dữ liệu |
-| Gán nhãn Roboflow | Tạo bbox cho biển số |
-| Convert OBB/Polygon → YOLO bbox | Chuẩn hóa label về 5 cột |
-| Kiểm tra label | Phát hiện label rỗng, sai class, bbox lỗi |
-| Split an toàn | Chia train/val/test trước augmentation |
-| Augment train | Tăng độ đa dạng cho huấn luyện |
-| Giữ nguyên val/test | Tránh data leakage |
+| Preprocessing | Giải nén ảnh, xóa trùng, kiểm tra kích thước, convert label, kiểm tra bbox |
+| Split | Chia train/val/test trước augmentation |
+| Augmentation train | Brightness/Contrast, Hue/Saturation, Blur nhẹ, Scale/Translate, Rotate nhỏ |
+| Không sử dụng | Flip ngang/dọc, xoay 90°/180°, crop mạnh, cutout che trực tiếp biển số |
 
----
-
-## 🧬 Train Augmentation
-
-| Augmentation | Mục tiêu |
-|---|---|
-| Brightness / Contrast | Mô phỏng thay đổi ánh sáng |
-| Hue / Saturation | Mô phỏng khác biệt màu ảnh |
-| Blur nhẹ | Mô phỏng ảnh mờ nhẹ |
-| Scale / Translate | Mô phỏng thay đổi vị trí |
-| Rotate nhỏ | Mô phỏng góc chụp lệch |
-
-Không dùng các biến đổi dễ làm sai đặc trưng biển số: flip ngang/dọc, xoay 90°/180°, crop mạnh làm mất biển số, cutout che trực tiếp vùng biển số.
-
----
-
-## 📁 Repository Structure
+### 📁 Repository Structure
 
 ```text
 .
@@ -144,19 +166,16 @@ Không dùng các biến đổi dễ làm sai đặc trưng biển số: flip ng
 │   ├── sample_bbox_grid.png
 │   ├── split_distribution.png
 │   └── yolov26_detection_result.png
-│
 ├── notebooks/
 │   └── bs.ipynb
-│
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+```
 
----
+### 🏷️ YOLO Label Format
 
-## 🏷️ YOLO Label Format
-
-Mỗi file `.txt` tương ứng với một ảnh:
+Mỗi ảnh có một file `.txt` tương ứng:
 
 ```text
 class_id x_center y_center width height
@@ -168,11 +187,9 @@ Ví dụ:
 0 0.512345 0.634211 0.214532 0.092415
 ```
 
-Các tọa độ đã được chuẩn hóa về khoảng `[0, 1]`.
+Tất cả tọa độ được chuẩn hóa về khoảng `[0, 1]`.
 
----
-
-## ⚙️ data.yaml
+### ⚙️ `data.yaml`
 
 ```yaml
 train: train/images
@@ -183,72 +200,15 @@ nc: 1
 names: ['Bien-so']
 ```
 
----
+### 🧪 Reproduce Preprocessing
 
-## 🚀 Quick Start
-
-### 1. Clone repo
-
-```bash
-git clone https://github.com/franceto/Dataset_License-plate-number.git
-cd Dataset_License-plate-number
-```
-
-### 2. Cài thư viện
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Train nhanh với YOLO
-
-```bash
-yolo detect train model=yolov8n.pt data=dataset/data.yaml imgsz=640 epochs=100 batch=16
-```
-
-### 4. Validate
-
-```bash
-yolo detect val model=runs/detect/train/weights/best.pt data=dataset/data.yaml
-```
-
-### 5. Predict ảnh mới
-
-```bash
-yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image.jpg
-```
-
----
-
-## 📦 Download Dataset from Kaggle
-
-Cài Kaggle CLI:
-
-```bash
-pip install kaggle
-```
-
-Tải dataset:
-
-```bash
-kaggle datasets download -d tanhphp/vietnamese-license-plates -p ./kaggle_dataset --unzip
-```
-
-Hoặc tải trực tiếp tại:
-
-[https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates](https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates)
-
----
-
-## 🧪 Reproduce Preprocessing
-
-Notebook xử lý dữ liệu nằm tại:
+Notebook tái tạo pipeline:
 
 ```text
 notebooks/bs.ipynb
 ```
 
-Notebook gồm các bước chính:
+Các bước chính:
 
 ```text
 1. Giải nén dữ liệu gốc
@@ -264,15 +224,9 @@ Notebook gồm các bước chính:
 11. Tạo biểu đồ README
 ```
 
----
+### 🏆 YOLOv26 Benchmark
 
-## 🏆 YOLOv26 Benchmark
-
-Dataset đã được thử nghiệm với **YOLOv26** cho bài toán phát hiện biển số xe Việt Nam.
-
-Repo huấn luyện:
-
-[https://github.com/franceto/Yolov26_License-plate-number_Detection](https://github.com/franceto/Yolov26_License-plate-number_Detection)
+Repo huấn luyện: [Yolov26 License Plate Number Detection](https://github.com/franceto/Yolov26_License-plate-number_Detection)
 
 | Split | Precision | Recall | mAP50 | mAP50-95 |
 |---|---:|---:|---:|---:|
@@ -284,25 +238,19 @@ Repo huấn luyện:
 | mAP50 | 0.967 |
 | mAP50-95 | 0.693 |
 
-![YOLOv26 detection result](assets/yolov26_detection_result.png)
+### ✅ Final Output
 
----
-
-## ✅ Final Output
-
-Kết quả cuối cùng là một dataset YOLO đã sẵn sàng để huấn luyện:
+Dataset cuối cùng đã sẵn sàng để huấn luyện YOLO:
 
 - 1 class: `Bien-so`
 - Label chuẩn YOLO bbox
-- Có sẵn `train`, `val`, `test`
-- Train đã được tăng cường dữ liệu
-- Val/test giữ nguyên để đánh giá công bằng
+- Có sẵn train/val/test
+- Train đã được augmentation
+- Val/test giữ nguyên
 - Có notebook tái tạo pipeline
 - Có ảnh minh họa và biểu đồ thống kê
 
----
-
-## 🔎 Search Keywords
+### 🔎 Search Keywords
 
 ```text
 Vietnamese license plate dataset
@@ -314,25 +262,18 @@ Dataset biển số xe Việt Nam YOLO
 franceto license plate YOLO dataset
 ```
 
----
+### ⚠️ Note
 
-## ⚠️ Note
+Dataset được xây dựng cho mục đích học tập, nghiên cứu và thực hành Computer Vision.  
+Nếu dùng cho sản phẩm thương mại hoặc công bố học thuật, vui lòng kiểm tra thêm về bản quyền ảnh, quyền riêng tư và nguồn dữ liệu gốc.
 
-Dataset được xây dựng phục vụ mục đích học tập, nghiên cứu và thực hành Computer Vision.
-
-Nếu sử dụng trong sản phẩm thương mại hoặc công bố học thuật, vui lòng kiểm tra thêm vấn đề liên quan đến bản quyền ảnh, quyền riêng tư và nguồn dữ liệu ảnh gốc.
-
----
-
-## 👥 Authors
+### 👥 Authors
 
 **franceto (ANH PHAP TO)**  
 GitHub: [https://github.com/franceto](https://github.com/franceto)
 
----
+### ⭐ Support
 
-## ⭐ Support
-
-Nếu project hữu ích, hãy cho một sao nhé! ⭐
+Nếu project hữu ích, hãy cho repo một sao nhé! ⭐
 
 Made with ❤️ by **Franceto (ANH PHAP TO)**
