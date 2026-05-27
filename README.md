@@ -1,4 +1,4 @@
-# 🇻🇳 Vietnamese License Plate Dataset YOLO
+#  Vietnamese License Plate Dataset YOLO
 
 <div align="center">
 
@@ -21,13 +21,13 @@
 
 ---
 
-## 🚀 Quick Demo & Visuals
+## Quick Demo & Visuals
 
 <div align="center">
 
-[📦 Kaggle Dataset](https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates) ·
-[🧠 YOLOv26 Training Repo](https://github.com/franceto/Yolov26_License-plate-number_Detection) ·
-[👤 Author](https://github.com/franceto)
+[ Kaggle Dataset](https://www.kaggle.com/datasets/tanhphp/vietnamese-license-plates) ·
+[ YOLOv26 Training Repo](https://github.com/franceto/Yolov26_License-plate-number_Detection) ·
+[ Author](https://github.com/franceto)
 
 <br/><br/>
 
@@ -37,17 +37,17 @@
 
 ---
 
-## ✨ Tính Năng Nổi Bật
+##  Tính Năng Nổi Bật
 
-- 🏷️ **Label chuẩn YOLO bbox:** mỗi biển số được gán nhãn sát vùng biển số, không bao gồm xe hoặc nền thừa.
-- 🇻🇳 **Dữ liệu thực tế Việt Nam:** gồm xe máy, xe con, xe tải, nhiều bối cảnh sáng/tối/mờ/chói/che khuất.
-- 🧪 **Chia tập an toàn:** train/val/test theo tỉ lệ `70/20/10`, augmentation chỉ áp dụng trên train.
-- 🔍 **Kiểm tra no-leak:** giữ nguyên val/test để đánh giá khách quan và hạn chế data leakage.
-- 📊 **Có notebook tái tạo:** toàn bộ pipeline xử lý, kiểm tra label, thống kê và tạo biểu đồ nằm trong `notebooks/bs.ipynb`.
+-  **Label chuẩn YOLO bbox:** mỗi biển số được gán nhãn sát vùng biển số, không bao gồm xe hoặc nền thừa.
+-  **Dữ liệu thực tế Việt Nam:** gồm xe máy, xe con, xe tải, nhiều bối cảnh sáng/tối/mờ/chói/che khuất.
+-  **Chia tập an toàn:** train/val/test theo tỉ lệ `70/20/10`, augmentation chỉ áp dụng trên train.
+-  **Kiểm tra no-leak:** giữ nguyên val/test để đánh giá khách quan và hạn chế data leakage.
+-  **Có notebook tái tạo:** toàn bộ pipeline xử lý, kiểm tra label, thống kê và tạo biểu đồ nằm trong `notebooks/bs.ipynb`.
 
 ---
 
-## 🛠️ Công Nghệ Sử Dụng
+##  Công Nghệ Sử Dụng
 
 <div align="center">
 
@@ -62,7 +62,7 @@
 
 ---
 
-## ⚡ Triển Khai Nhanh
+##  Triển Khai Nhanh
 
 **Prerequisites**
 
@@ -94,9 +94,9 @@ yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image
 
 ---
 
-## 📦 Dataset, Pipeline & Benchmark
+##  Dataset, Pipeline & Benchmark
 
-### 📌 Tổng Quan Dataset
+###  Tổng Quan Dataset
 
 | Hạng mục | Giá trị |
 |---|---:|
@@ -111,7 +111,7 @@ yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image
 | Annotation | Roboflow thủ công |
 | Augmentation | Chỉ áp dụng trên train |
 
-### 📊 Split Gốc Trước Augmentation
+###  Split Gốc Trước Augmentation
 
 | Split | Images | Labels |
 |---|---:|---:|
@@ -121,7 +121,7 @@ yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image
 
 > Val/test được giữ nguyên để đánh giá công bằng và hạn chế data leakage.
 
-### 🖼️ Visual Statistics
+###  Visual Statistics
 
 <div align="center">
 
@@ -133,7 +133,7 @@ yolo detect predict model=runs/detect/train/weights/best.pt source=path/to/image
 
 </div>
 
-### 🔁 Data Pipeline
+###  Data Pipeline
 
 ```mermaid
 flowchart LR
@@ -147,7 +147,7 @@ flowchart LR
     H --> I[Final YOLO dataset]
 ```
 
-### 🧹 Preprocessing & Augmentation
+###  Preprocessing & Augmentation
 
 | Nhóm xử lý | Nội dung |
 |---|---|
@@ -156,7 +156,7 @@ flowchart LR
 | Augmentation train | Brightness/Contrast, Hue/Saturation, Blur nhẹ, Scale/Translate, Rotate nhỏ |
 | Không sử dụng | Flip ngang/dọc, xoay 90°/180°, crop mạnh, cutout che trực tiếp biển số |
 
-### 📁 Repository Structure
+###  Repository Structure
 
 ```text
 .
@@ -173,7 +173,7 @@ flowchart LR
 └── requirements.txt
 ```
 
-### 🏷️ YOLO Label Format
+###  YOLO Label Format
 
 Mỗi ảnh có một file `.txt` tương ứng:
 
@@ -189,7 +189,7 @@ Ví dụ:
 
 Tất cả tọa độ được chuẩn hóa về khoảng `[0, 1]`.
 
-### ⚙️ `data.yaml`
+###  `data.yaml`
 
 ```yaml
 train: train/images
@@ -200,7 +200,7 @@ nc: 1
 names: ['Bien-so']
 ```
 
-### 🧪 Reproduce Preprocessing
+###  Reproduce Preprocessing
 
 Notebook tái tạo pipeline:
 
@@ -224,7 +224,7 @@ Các bước chính:
 11. Tạo biểu đồ README
 ```
 
-### 🏆 YOLOv26 Benchmark
+###  YOLOv26 Benchmark
 
 Repo huấn luyện: [Yolov26 License Plate Number Detection](https://github.com/franceto/Yolov26_License-plate-number_Detection)
 
@@ -238,7 +238,7 @@ Repo huấn luyện: [Yolov26 License Plate Number Detection](https://github.com
 | mAP50 | 0.967 |
 | mAP50-95 | 0.693 |
 
-### ✅ Final Output
+###  Final Output
 
 Dataset cuối cùng đã sẵn sàng để huấn luyện YOLO:
 
@@ -250,7 +250,7 @@ Dataset cuối cùng đã sẵn sàng để huấn luyện YOLO:
 - Có notebook tái tạo pipeline
 - Có ảnh minh họa và biểu đồ thống kê
 
-### 🔎 Search Keywords
+###  Search Keywords
 
 ```text
 Vietnamese license plate dataset
@@ -262,18 +262,18 @@ Dataset biển số xe Việt Nam YOLO
 franceto license plate YOLO dataset
 ```
 
-### ⚠️ Note
+###  Note
 
 Dataset được xây dựng cho mục đích học tập, nghiên cứu và thực hành Computer Vision.  
 Nếu dùng cho sản phẩm thương mại hoặc công bố học thuật, vui lòng kiểm tra thêm về bản quyền ảnh, quyền riêng tư và nguồn dữ liệu gốc.
 
-### 👥 Authors
+###  Authors
 
 **franceto (ANH PHAP TO)**  
 GitHub: [https://github.com/franceto](https://github.com/franceto)
 
-### ⭐ Support
+###  Support
 
-Nếu project hữu ích, hãy cho repo một sao nhé! ⭐
+Nếu hữu ích, hãy cho repo một sao nhé! ⭐
 
-Made with ❤️ by **Franceto (ANH PHAP TO)**
+Made with by **Franceto (ANH PHAP TO)**
